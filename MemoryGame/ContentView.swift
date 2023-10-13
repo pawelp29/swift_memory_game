@@ -35,7 +35,7 @@ struct ContentView: View {
                 }.font(.largeTitle)
                 Spacer()
                 Button("+") {
-                    if (numCards < symbols.count) {
+                    if (numCards/2 < symbols.count/2) {
                         numCards += 2
                     }
                 }.font(.largeTitle)
