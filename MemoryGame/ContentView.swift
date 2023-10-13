@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let symbols = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🤣", "😂"]
+    let symbols: Array = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🤣", "😂", "🥰", "😘", "😛", "😋", "🌶️", "🫑", "🍞", "🧅"]
     @State var numCards: Int = 4
     
 //    func adjustCardNumber(by offset: Int, symbol: String) -> some View {
@@ -18,12 +18,28 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            ForEach(0..<numCards/2, id: \.self) {index in
-                HStack {
-                    CardView(content: symbols[2*index]).foregroundColor(.blue)
-                    CardView(content: symbols[2*index+1]).foregroundColor(.blue)
-                }.frame(height: 100)
+            ScrollView {
+                ForEach(0..<numCards/2, id: \.self) {index in
+                    HStack {
+                        CardView(content: symbols[2*index]).foregroundColor(.blue)
+                        CardView(content: symbols[2*index+1]).foregroundColor(.blue)
+                    }.frame(height: 100)
+                }
             }
+            Spacer()
+            HStack {
+                Button("-") {
+                    if (numCards > 0) {
+                        numCards -= 2
+                    }
+                }.font(.largeTitle)
+                Spacer()
+                Button("+") {
+                    if (numCards < symbols.count) {
+                        numCards += 2
+                    }
+                }.font(.largeTitle)
+            }.padding()
         }
         .padding()
     }
