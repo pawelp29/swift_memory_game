@@ -14,6 +14,7 @@
 		3F47ECF92AD6A6D200E4B9D3 /* MemoryGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47ECF82AD6A6D200E4B9D3 /* MemoryGameTests.swift */; };
 		3F47ED032AD6A6D200E4B9D3 /* MemoryGameUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47ED022AD6A6D200E4B9D3 /* MemoryGameUITests.swift */; };
 		3F47ED052AD6A6D200E4B9D3 /* MemoryGameUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47ED042AD6A6D200E4B9D3 /* MemoryGameUITestsLaunchTests.swift */; };
+		3F47ED122AD6A8C200E4B9D3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47ED112AD6A8C200E4B9D3 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		3F47ECFE2AD6A6D200E4B9D3 /* MemoryGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F47ED022AD6A6D200E4B9D3 /* MemoryGameUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameUITests.swift; sourceTree = "<group>"; };
 		3F47ED042AD6A6D200E4B9D3 /* MemoryGameUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F47ED112AD6A8C200E4B9D3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				3F47ECE92AD6A6CE00E4B9D3 /* ContentView.swift */,
 				3F47ECEB2AD6A6D100E4B9D3 /* Assets.xcassets */,
 				3F47ECED2AD6A6D100E4B9D3 /* Preview Content */,
+				3F47ED112AD6A8C200E4B9D3 /* CardView.swift */,
 			);
 			path = MemoryGame;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F47ECEA2AD6A6CE00E4B9D3 /* ContentView.swift in Sources */,
+				3F47ED122AD6A8C200E4B9D3 /* CardView.swift in Sources */,
 				3F47ECE82AD6A6CE00E4B9D3 /* MemoryGameApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
