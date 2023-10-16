@@ -12,34 +12,45 @@ struct ContentView: View {
     let symbols: Array = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🤣", "😂", "🥰", "😘", "😛", "😋", "🌶️", "🫑", "🍞", "🧅"]
     @State var numCards: Int = 4
     
-//    func adjustCardNumber(by offset: Int, symbol: String) -> some View {
-//        
-//    }
+    var cardAdder: some View {
+        Button("+") {
+            if (numCards/2 < symbols.count/2) {
+                numCards += 2
+            }
+        }.font(.largeTitle).buttonStyle(.borderedProminent).disabled(numCards >= symbols.count)
+    }
     
+    var cardRemover: some View {
+        Button("-") {
+            if (numCards > 0) {
+                numCards -= 2
+            }
+        }.font(.largeTitle).buttonStyle(.borderedProminent).disabled(numCards == 0)
+    }
+    
+    var numCardsAdjuster: some View {
+        HStack {
+            cardRemover
+            Spacer()
+            cardAdder
+        }.padding()
+    }
+    
+    var cardDisplay: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+            ForEach (0..<numCards, id: \.self) {index in
+                CardView(content: symbols[index]).aspectRatio(1/1, contentMode: .fit).foregroundColor(.blue)
+            }
+        }
+    }
+
     var body: some View {
         VStack {
             ScrollView {
-                ForEach(0..<numCards/2, id: \.self) {index in
-                    HStack {
-                        CardView(content: symbols[2*index]).foregroundColor(.blue)
-                        CardView(content: symbols[2*index+1]).foregroundColor(.blue)
-                    }.frame(height: 100)
-                }
+                cardDisplay
             }
             Spacer()
-            HStack {
-                Button("-") {
-                    if (numCards > 0) {
-                        numCards -= 2
-                    }
-                }.font(.largeTitle).disabled(numCards == 0)
-                Spacer()
-                Button("+") {
-                    if (numCards/2 < symbols.count/2) {
-                        numCards += 2
-                    }
-                }.font(.largeTitle).disabled(numCards >= symbols.count)
-            }.padding()
+            numCardsAdjuster
         }
         .padding()
     }
