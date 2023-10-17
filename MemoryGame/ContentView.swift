@@ -12,42 +12,49 @@ struct ContentView: View {
     let symbols: Array = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🤣", "😂", "🥰", "😘", "😛", "😋", "🌶️", "🫑", "🍞", "🧅"]
     @State var numCards: Int = 4
     
-    var cardAdder: some View {
-        Button("+") {
-            if (numCards/2 < symbols.count/2) {
-                numCards += 2
-            }
-        }.font(.largeTitle).buttonStyle(.borderedProminent).disabled(numCards >= symbols.count)
-    }
-    
-    var cardRemover: some View {
-        Button("-") {
-            if (numCards > 0) {
-                numCards -= 2
-            }
-        }.font(.largeTitle).buttonStyle(.borderedProminent).disabled(numCards == 0)
-    }
-    
     var numCardsAdjuster: some View {
         HStack {
-            cardRemover
+            buttonMinus
             Spacer()
-            cardAdder
+            buttonPlus
         }.padding()
     }
     
-    var cardDisplay: some View {
+    var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach (0..<numCards, id: \.self) {index in
-                CardView(content: symbols[index]).aspectRatio(1/1, contentMode: .fit).foregroundColor(.blue)
+                CardView(content: symbols[index]).aspectRatio(2/1, contentMode: .fit).foregroundColor(.blue)
             }
         }
+    }
+    
+    func adjustCardNumber(by offset: Int, symbol: String) -> some View {
+        symbol == "+" ?
+            Button(symbol) {
+                if (numCards/2 < symbols.count/2) {
+                    numCards += 2
+                }
+            }.font(.largeTitle).disabled(numCards >= symbols.count)
+            :
+            Button(symbol) {
+                if (numCards > 0) {
+                    numCards -= 2
+                }
+            }.font(.largeTitle).disabled(numCards == 0)
+    }
+    
+    var buttonPlus: some View {
+        adjustCardNumber(by: 2, symbol: "+")
+    }
+    
+    var buttonMinus: some View {
+        adjustCardNumber(by: -2, symbol: "-")
     }
 
     var body: some View {
         VStack {
             ScrollView {
-                cardDisplay
+                cards
             }
             Spacer()
             numCardsAdjuster
