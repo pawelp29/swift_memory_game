@@ -34,13 +34,13 @@ struct ContentView: View {
                 if (numCards/2 < symbols.count/2) {
                     numCards += 2
                 }
-            }.font(.largeTitle).disabled(numCards >= symbols.count)
+            }.font(.largeTitle).disabled(numCards >= symbols.count).frame(width: 55, height: 45).border(.blue, width: 2).cornerRadius(4)
             :
             Button(symbol) {
                 if (numCards > 0) {
                     numCards -= 2
                 }
-            }.font(.largeTitle).disabled(numCards == 0)
+            }.font(.largeTitle).disabled(numCards == 0).frame(width: 55, height: 45).border(.blue, width: 2).cornerRadius(4)
     }
     
     var buttonPlus: some View {
