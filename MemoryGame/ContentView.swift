@@ -11,19 +11,34 @@ struct ContentView: View {
     
     let symbols: Array = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🤣", "😂", "🥰", "😘", "😛", "😋", "🌶️", "🫑", "🍞", "🧅"]
     @State var numCards: Int = 4
+    @State var selectedColor: Color = .green
     
-    var numCardsAdjuster: some View {
+//    var numCardsAdjuster: some View {
+//        HStack {
+//            buttonMinus
+//            Spacer()
+//            buttonPlus
+//        }.padding()
+//    }
+    
+    func changeColor(newColor: Color) {
+        selectedColor = newColor
+    }
+    
+    var themeAdjuster: some View {
         HStack {
-            buttonMinus
+            ThemeButton(symbol: "leaf.circle", text: "Zielony", action: {selectedColor = .green}).foregroundColor(.green)
             Spacer()
-            buttonPlus
-        }.padding()
+            ThemeButton(symbol: "flame.circle", text: "Czerwony", action: {selectedColor = .red}).foregroundColor(.red)
+            Spacer()
+            ThemeButton(symbol: "snowflake.circle", text: "Niebieski", action: {selectedColor = .blue}).foregroundColor(.blue)
+        }
     }
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
             ForEach (0..<numCards, id: \.self) {index in
-                CardView(content: symbols[index]).aspectRatio(2/1, contentMode: .fit).foregroundColor(.blue)
+                CardView(content: symbols[index]).aspectRatio(2/3, contentMode: .fit).foregroundColor(selectedColor)
             }
         }
     }
@@ -53,11 +68,13 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
+            Text("Memo").font(.largeTitle)
             ScrollView {
                 cards
             }
             Spacer()
-            numCardsAdjuster
+//            numCardsAdjuster
+            themeAdjuster
         }
         .padding()
     }
