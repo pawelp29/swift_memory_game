@@ -14,7 +14,7 @@ struct ThemeButton: View {
     var body: some View {
         VStack {
             Image(systemName: symbol).font(.largeTitle)
-            Text(text)
+            Text(text).font(.footnote)
         }
         .onTapGesture {
             action()
@@ -23,5 +23,5 @@ struct ThemeButton: View {
 }
 
 #Preview {
-    ThemeButton(symbol: "0", text: "Tekst", action: {})
+    ThemeButton(symbol: "paperplane.circle", text: "Tekst", action: {})
 }
