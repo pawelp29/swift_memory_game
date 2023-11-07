@@ -37,17 +37,17 @@ struct ContentView: View {
             ThemeButton(symbol: "leaf.circle", text: "Zielony", action: {
                 selectedColor = .green
                 shuffleSymbols(symbolsArray: symbolsGreen)
-            }).foregroundColor(.green)
+            }).foregroundColor(selectedColor)
             Spacer()
             ThemeButton(symbol: "flame.circle", text: "Czerwony", action: {
                 selectedColor = .red
                 shuffleSymbols(symbolsArray: symbolsRed)
-            }).foregroundColor(.red)
+            }).foregroundColor(selectedColor)
             Spacer()
             ThemeButton(symbol: "snowflake.circle", text: "Niebieski", action: {
                 selectedColor = .blue
                 shuffleSymbols(symbolsArray: symbolsBlue)
-            }).foregroundColor(.blue)
+            }).foregroundColor(selectedColor)
         }
     }
     
