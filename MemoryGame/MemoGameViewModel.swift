@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-class MemoGameViewModel {
-    private static let symbols = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️"]
+class MemoGameViewModel: ObservableObject {
+    private static let symbols = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🌶️", "🫑", "🍞", "🧅", "🥝", "🍕", "✈️", "🚄", "🚔", "🚑"]
     
-    private var model = MemoGameViewModel.createMemoGame()
+    @Published private var model = MemoGameViewModel.createMemoGame()
     
     static func createMemoGame() -> MemoGameModel<String> {
         return MemoGameModel<String>(
-            numberOfPairsOfCards: 4
+            numberOfPairsOfCards: 8
         ) { index in
-            if index < symbols.count {
+            if symbols.indices.contains(index) {
                 return symbols[index]
             }
             else {
@@ -29,7 +29,11 @@ class MemoGameViewModel {
         return model.cards
     }
     
-    func choose(card: MemoGameModel<String>.Card) {
-        model.choose(card: card)
+    func shuffle() {
+        model.shuffle()
+    }
+    
+    func choose(_ card: MemoGameModel<String>.Card){
+        model.choose(card)
     }
 }

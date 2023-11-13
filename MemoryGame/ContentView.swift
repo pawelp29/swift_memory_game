@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let symbolsGreen: Array = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️"]
-    let symbolsRed: Array = ["🌶️", "🫑", "🍞", "🧅", "🥝", "🍕", "🌶️", "🫑", "🍞", "🧅", "🥝", "🍕"]
-    let symbolsBlue: Array = ["✈️", "🚄", "🚔", "🚑", "✈️", "🚄", "🚔", "🚑"]
-    @State var symbols: Array = ["😁", "😅", "😍", "🙃", "🙂", "☺️", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "😁", "😇", "😊"]
-    @State var numCards: Int = 4
+    @ObservedObject var viewModel: MemoGameViewModel
+    
+//    @State var symbols: Array = ["😁", "😅", "😍", "🙃", "🙂", "☺️", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "😁", "😇", "😊"]
+//    @State var numCards: Int = 4
     @State var selectedColor: Color = .green
     
 //    var numCardsAdjuster: some View {
@@ -24,37 +23,42 @@ struct ContentView: View {
 //        }.padding()
 //    }
     
-    func shuffleSymbols(symbolsArray: Array<String>) {
-        symbols = symbolsArray.shuffled()
-    }
+//    func shuffleSymbols(symbolsArray: Array<String>) {
+//        symbols = symbolsArray.shuffled()
+//    }
+//    
+//    func changeColor(newColor: Color) {
+//        selectedColor = newColor
+//    }
     
-    func changeColor(newColor: Color) {
-        selectedColor = newColor
-    }
-    
-    var themeAdjuster: some View {
-        HStack {
-            ThemeButton(symbol: "leaf.circle", text: "Zielony", action: {
-                selectedColor = .green
-                shuffleSymbols(symbolsArray: symbolsGreen)
-            }).foregroundColor(selectedColor)
-            Spacer()
-            ThemeButton(symbol: "flame.circle", text: "Czerwony", action: {
-                selectedColor = .red
-                shuffleSymbols(symbolsArray: symbolsRed)
-            }).foregroundColor(selectedColor)
-            Spacer()
-            ThemeButton(symbol: "snowflake.circle", text: "Niebieski", action: {
-                selectedColor = .blue
-                shuffleSymbols(symbolsArray: symbolsBlue)
-            }).foregroundColor(selectedColor)
-        }
-    }
+//    var themeAdjuster: some View {
+//        HStack {
+//            ThemeButton(symbol: "leaf.circle", text: "Zielony", action: {
+//                selectedColor = .green
+//                shuffleSymbols(symbolsArray: symbolsGreen)
+//            }).foregroundColor(selectedColor)
+//            Spacer()
+//            ThemeButton(symbol: "flame.circle", text: "Czerwony", action: {
+//                selectedColor = .red
+//                shuffleSymbols(symbolsArray: symbolsRed)
+//            }).foregroundColor(selectedColor)
+//            Spacer()
+//            ThemeButton(symbol: "snowflake.circle", text: "Niebieski", action: {
+//                selectedColor = .blue
+//                shuffleSymbols(symbolsArray: symbolsBlue)
+//            }).foregroundColor(selectedColor)
+//        }
+//    }
     
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
-            ForEach (0..<symbols.count, id: \.self) {index in
-                CardView(content: symbols[index]).aspectRatio(2/3, contentMode: .fit).foregroundColor(selectedColor)
+            ForEach(viewModel.cards) { card in
+                CardView(card)
+                    .aspectRatio(2/3, contentMode: .fit).foregroundColor(selectedColor)
+                    .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
+                    }
             }
         }
     }
@@ -88,14 +92,14 @@ struct ContentView: View {
             ScrollView {
                 cards
             }
-            Spacer()
+//            Spacer()
 //            numCardsAdjuster
-            themeAdjuster
+//            themeAdjuster
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(viewModel: MemoGameViewModel())
 }
