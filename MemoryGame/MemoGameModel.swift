@@ -8,6 +8,25 @@
 import Foundation
 
 struct MemoGameModel<CardContent> {
-    private var cards: Array<CardView>
+    private(set) var cards: Array<Card>
+    
+    init(numberOfPairOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+        cards = []
+        for pairIndex in 0..<numberOfPairOfCards {
+            let content = cardContentFactory(pairIndex)
+            cards.append(Card(content: content))
+            cards.append(Card(content: content))
+        }
+    }
+    
+    func choose(card: Card) {
+        
+    }
+    
+    struct Card {
+        var isFaceUp: Bool = false
+        var isMatched: Bool = false
+        var content: CardContent
+    }
 
 }
