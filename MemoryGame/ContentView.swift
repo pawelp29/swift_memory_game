@@ -50,6 +50,12 @@ struct ContentView: View {
 //        }
 //    }
     
+    var shuffleButton: some View {
+        Button("Shuffle") {
+            viewModel.shuffle()
+        }.font(.headline)
+    }
+    
     var cards: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
             ForEach(viewModel.cards) { card in
@@ -92,7 +98,8 @@ struct ContentView: View {
             ScrollView {
                 cards
             }
-//            Spacer()
+            Spacer()
+            shuffleButton
 //            numCardsAdjuster
 //            themeAdjuster
         }
