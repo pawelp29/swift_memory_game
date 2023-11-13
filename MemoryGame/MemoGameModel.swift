@@ -11,12 +11,8 @@ struct MemoGameModel<CardContent> where CardContent: Equatable {
     private(set) var cards: Array<Card>
     
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
-        cards = []
-        for pairIndex in 0..<max(2, numberOfPairsOfCards) {
-            let content = cardContentFactory(pairIndex)
-            cards.append(Card(id:"\(pairIndex+1)a", content: content))
-            cards.append(Card(id:"\(pairIndex+1)b", content: content))
-        }
+        self.cards = []
+        setTheme(pairNum: 8, cardContentFactory: cardContentFactory)
     }
     
     mutating func choose(_ card: Card) {
@@ -35,6 +31,15 @@ struct MemoGameModel<CardContent> where CardContent: Equatable {
     
     mutating func shuffle() {
         cards.shuffle()
+    }
+    
+    mutating func setTheme(pairNum: Int, cardContentFactory: (Int) -> CardContent) {
+        cards = []
+        for pairIndex in 0..<max(2, pairNum) {
+            let content = cardContentFactory(pairIndex)
+            cards.append(Card(id:"\(pairIndex+1)a", content: content))
+            cards.append(Card(id:"\(pairIndex+1)b", content: content))
+        }
     }
     
     struct Card: Equatable, Identifiable {

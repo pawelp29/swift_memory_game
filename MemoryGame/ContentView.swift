@@ -35,16 +35,19 @@ struct ContentView: View {
         HStack {
             ThemeButton(symbol: "leaf.circle", text: "Green", action: {
                 selectedColor = .green
+                viewModel.setTheme(pairNum: 10, themeId: 0)
                 viewModel.shuffle()
             }).foregroundColor(selectedColor)
             Spacer()
             ThemeButton(symbol: "flame.circle", text: "Red", action: {
                 selectedColor = .red
+                viewModel.setTheme(pairNum: 6, themeId: 1)
                 viewModel.shuffle()
             }).foregroundColor(selectedColor)
             Spacer()
             ThemeButton(symbol: "snowflake.circle", text: "Blue", action: {
                 selectedColor = .blue
+                viewModel.setTheme(pairNum: 4, themeId: 2)
                 viewModel.shuffle()
             }).foregroundColor(selectedColor)
         }
