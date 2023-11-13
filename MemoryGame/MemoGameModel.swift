@@ -10,9 +10,9 @@ import Foundation
 struct MemoGameModel<CardContent> {
     private(set) var cards: Array<Card>
     
-    init(numberOfPairOfCards: Int, cardContentFactory: (Int) -> CardContent) {
+    init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = []
-        for pairIndex in 0..<numberOfPairOfCards {
+        for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content))
             cards.append(Card(content: content))
