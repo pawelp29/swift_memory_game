@@ -31,24 +31,24 @@ struct ContentView: View {
 //        selectedColor = newColor
 //    }
     
-//    var themeAdjuster: some View {
-//        HStack {
-//            ThemeButton(symbol: "leaf.circle", text: "Zielony", action: {
-//                selectedColor = .green
-//                shuffleSymbols(symbolsArray: symbolsGreen)
-//            }).foregroundColor(selectedColor)
-//            Spacer()
-//            ThemeButton(symbol: "flame.circle", text: "Czerwony", action: {
-//                selectedColor = .red
-//                shuffleSymbols(symbolsArray: symbolsRed)
-//            }).foregroundColor(selectedColor)
-//            Spacer()
-//            ThemeButton(symbol: "snowflake.circle", text: "Niebieski", action: {
-//                selectedColor = .blue
-//                shuffleSymbols(symbolsArray: symbolsBlue)
-//            }).foregroundColor(selectedColor)
-//        }
-//    }
+    var themeAdjuster: some View {
+        HStack {
+            ThemeButton(symbol: "leaf.circle", text: "Green", action: {
+                selectedColor = .green
+                viewModel.shuffle()
+            }).foregroundColor(selectedColor)
+            Spacer()
+            ThemeButton(symbol: "flame.circle", text: "Red", action: {
+                selectedColor = .red
+                viewModel.shuffle()
+            }).foregroundColor(selectedColor)
+            Spacer()
+            ThemeButton(symbol: "snowflake.circle", text: "Blue", action: {
+                selectedColor = .blue
+                viewModel.shuffle()
+            }).foregroundColor(selectedColor)
+        }
+    }
     
     var shuffleButton: some View {
         Button("Shuffle") {
@@ -94,12 +94,13 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Memo").font(.largeTitle)
+            Text("Memo").font(.largeTitle).foregroundColor(selectedColor)
             ScrollView {
-                cards
+                cards.animation(.default, value: viewModel.cards)
             }
             Spacer()
-            shuffleButton
+            shuffleButton.padding(.bottom).foregroundColor(selectedColor)
+            themeAdjuster
 //            numCardsAdjuster
 //            themeAdjuster
         }
