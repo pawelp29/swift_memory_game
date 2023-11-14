@@ -26,7 +26,7 @@ struct CardView: View {
                     .aspectRatio(1, contentMode: .fit)
             }.opacity(card.isFaceUp ? 1 : 0)
             base.fill().opacity(card.isFaceUp ? 0: 1)
-        }.padding(4)
+        }.padding(.init(top: 2, leading: 5, bottom: 2, trailing: 5))
     }
 }
 

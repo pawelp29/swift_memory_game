@@ -11,7 +11,7 @@ class MemoGameViewModel: ObservableObject {
 //    private static let symbols = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "🌶️", "🫑", "🍞", "🧅", "🥝", "🍕", "✈️", "🚄", "🚔", "🚑"]
     
     private static let symbols1 = ["😁", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️"]
-    private static let symbols2 = ["🌶️", "🫑", "🍞", "🧅", "🥝", "🍕"]
+    private static let symbols2 = ["🌶️", "🫑", "🍞", "🧅", "🥝", "🍕", "🍒", "🍊"]
     private static let symbols3 = ["✈️", "🚄", "🚔", "🚑"]
     private static let symbols = [symbols1, symbols2, symbols3]
     

@@ -44,7 +44,7 @@ struct ContentView: View {
     }
     
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)]) {
             ForEach(viewModel.cards) { card in
                 CardView(card)
                     .aspectRatio(2/3, contentMode: .fit).foregroundColor(viewModel.selectedColor)
@@ -80,7 +80,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Memo").font(.largeTitle)
+            Text("Memo").font(.largeTitle).foregroundColor(.black)
             ScrollView {
                 cards.animation(.default, value: viewModel.cards)
             }
