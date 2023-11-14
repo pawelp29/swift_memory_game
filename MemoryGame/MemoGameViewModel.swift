@@ -16,6 +16,7 @@ class MemoGameViewModel: ObservableObject {
     private static let symbols = [symbols1, symbols2, symbols3]
     
     @Published private var model = MemoGameViewModel.createMemoGame()
+    @Published var selectedColor = Color.green
     
     static func createMemoGame() -> MemoGameModel<String> {
         return MemoGameModel<String>(

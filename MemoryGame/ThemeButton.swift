@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct ThemeButton: View {
+    @ObservedObject var viewModel: MemoGameViewModel
+    
     let symbol: String
     let text: String
-    let action: () -> ()
+    let pairNum: Int
+    let themeId: Int
+    let color: Color
+    
     var body: some View {
         VStack {
             Image(systemName: symbol).font(.largeTitle)
             Text(text).font(.footnote)
         }
         .onTapGesture {
-            action()
-        }
+            viewModel.selectedColor = color
+            viewModel.setTheme(pairNum: pairNum, themeId: themeId)
+            viewModel.shuffle()
+        }.foregroundColor(viewModel.selectedColor)
     }
 }
 
 #Preview {
-    ThemeButton(symbol: "paperplane.circle", text: "Tekst", action: {})
+    ThemeButton(viewModel: MemoGameViewModel(), symbol: "snowflake.circle", text: "Blue", pairNum: 4, themeId: 2, color: .blue)
 }

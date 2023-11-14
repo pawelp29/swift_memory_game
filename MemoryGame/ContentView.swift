@@ -11,10 +11,6 @@ struct ContentView: View {
     
     @ObservedObject var viewModel: MemoGameViewModel
     
-//    @State var symbols: Array = ["😁", "😅", "😍", "🙃", "🙂", "☺️", "😅", "😊", "😍", "🙃", "🙂", "😇", "☺️", "😁", "😇", "😊"]
-//    @State var numCards: Int = 4
-    @State var selectedColor: Color = .green
-    
 //    var numCardsAdjuster: some View {
 //        HStack {
 //            buttonMinus
@@ -33,38 +29,25 @@ struct ContentView: View {
     
     var themeAdjuster: some View {
         HStack {
-            ThemeButton(symbol: "leaf.circle", text: "Green", action: {
-                selectedColor = .green
-                viewModel.setTheme(pairNum: 10, themeId: 0)
-                viewModel.shuffle()
-            }).foregroundColor(selectedColor)
+            ThemeButton(viewModel: viewModel, symbol: "leaf.circle", text: "Green", pairNum: 10, themeId: 0, color: .green)
             Spacer()
-            ThemeButton(symbol: "flame.circle", text: "Red", action: {
-                selectedColor = .red
-                viewModel.setTheme(pairNum: 6, themeId: 1)
-                viewModel.shuffle()
-            }).foregroundColor(selectedColor)
+            ThemeButton(viewModel: viewModel, symbol: "flame.circle", text: "Red", pairNum: 8, themeId: 1, color: .red)
             Spacer()
-            ThemeButton(symbol: "snowflake.circle", text: "Blue", action: {
-                selectedColor = .blue
-                viewModel.setTheme(pairNum: 4, themeId: 2)
-                viewModel.shuffle()
-            }).foregroundColor(selectedColor)
+            ThemeButton(viewModel: viewModel, symbol: "snowflake.circle", text: "Blue", pairNum: 4, themeId: 2, color: .blue)
         }
     }
     
     var shuffleButton: some View {
-        Button("Shuffle") {
+        Button("SHUFFLE") {
             viewModel.shuffle()
         }.font(.headline)
     }
     
     var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85))]) {
             ForEach(viewModel.cards) { card in
                 CardView(card)
-                    .aspectRatio(2/3, contentMode: .fit).foregroundColor(selectedColor)
-                    .padding(4)
+                    .aspectRatio(2/3, contentMode: .fit).foregroundColor(viewModel.selectedColor)
                     .onTapGesture {
                         viewModel.choose(card)
                     }
@@ -97,16 +80,15 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text("Memo").font(.largeTitle).foregroundColor(selectedColor)
+            Text("Memo").font(.largeTitle)
             ScrollView {
                 cards.animation(.default, value: viewModel.cards)
             }
             Spacer()
-            shuffleButton.padding(.bottom).foregroundColor(selectedColor)
+            shuffleButton.padding(.init(top: 2, leading: 2, bottom: 4, trailing: 2))
             themeAdjuster
 //            numCardsAdjuster
-//            themeAdjuster
-        }
+        }.foregroundColor(viewModel.selectedColor)
         .padding()
     }
 }

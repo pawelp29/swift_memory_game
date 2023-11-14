@@ -13,6 +13,7 @@ struct MemoGameModel<CardContent> where CardContent: Equatable {
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         self.cards = []
         setTheme(pairNum: 8, cardContentFactory: cardContentFactory)
+        self.cards.shuffle()
     }
     
     mutating func choose(_ card: Card) {
