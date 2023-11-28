@@ -29,9 +29,9 @@ struct ContentView: View {
     
     var themeAdjuster: some View {
         HStack {
-            ThemeButton(viewModel: viewModel, symbol: "leaf.circle", text: "Green", pairNum: 10, themeId: 0, color: .green)
+            ThemeButton(viewModel: viewModel, symbol: "leaf.circle", text: "Green", pairNum: 8, themeId: 0, color: .green)
             Spacer()
-            ThemeButton(viewModel: viewModel, symbol: "flame.circle", text: "Red", pairNum: 8, themeId: 1, color: .red)
+            ThemeButton(viewModel: viewModel, symbol: "flame.circle", text: "Red", pairNum: 6, themeId: 1, color: .red)
             Spacer()
             ThemeButton(viewModel: viewModel, symbol: "snowflake.circle", text: "Blue", pairNum: 4, themeId: 2, color: .blue)
         }
