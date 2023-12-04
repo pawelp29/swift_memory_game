@@ -20,6 +20,10 @@ struct TransformIntoCard: ViewModifier {
             base.fill()
                 .opacity(isFaceUp ? 0 : 1)
         }
+        .rotation3DEffect(
+            .degrees(isFaceUp ? 0 : 180),
+            axis: (x: 0, y: 1, z: 0)
+        )
     }
     
     private struct Constants {
