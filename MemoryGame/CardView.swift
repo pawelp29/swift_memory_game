@@ -21,9 +21,14 @@ struct CardView: View {
             Group{
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text(card.content).font(.system(size: 200))
-                    .minimumScaleFactor(0.01)
-                    .aspectRatio(1, contentMode: .fit)
+                CirclePart(endAngle: .degrees(250))
+                    .opacity(0.6)
+                    .overlay(
+                        Text(card.content).font(.system(size: 200))
+                            .minimumScaleFactor(0.01)
+                            .aspectRatio(1, contentMode: .fit)
+                    )
+                    .padding(4)
             }.opacity(card.isFaceUp ? 1 : 0)
             base.fill().opacity(card.isFaceUp ? 0: 1)
         }.padding(.init(top: 2, leading: 5, bottom: 2, trailing: 5)).opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
