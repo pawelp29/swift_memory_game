@@ -50,6 +50,10 @@ class MemoGameViewModel: ObservableObject {
         })
     }
     
+    var score: Int {
+        model.score
+    }
+    
     func choose(_ card: MemoGameModel<String>.Card){
         model.choose(card)
     }

@@ -11,6 +11,13 @@ struct ContentView: View {
     
     @ObservedObject var viewModel: MemoGameViewModel
     
+    @State private var lastScoreChange = (0, "")
+    
+    private func scoreChange(cardId: MemoGameModel<String>.Card.ID) -> Int{
+        let (amount, id) = lastScoreChange
+        return cardId == id ? amount : 0
+    }
+    
 //    var numCardsAdjuster: some View {
 //        HStack {
 //            buttonMinus
@@ -39,8 +46,15 @@ struct ContentView: View {
     
     var shuffleButton: some View {
         Button("SHUFFLE") {
-            viewModel.shuffle()
+            withAnimation {
+                viewModel.shuffle()
+            }
         }.font(.headline)
+    }
+    
+    private var score: some View{
+        Text("Score: \(viewModel.score)")
+            .animation(nil).foregroundColor(.black).font(.largeTitle)
     }
     
     var cards: some View {
@@ -48,8 +62,16 @@ struct ContentView: View {
             ForEach(viewModel.cards) { card in
                 CardView(card)
                     .aspectRatio(2/3, contentMode: .fit).foregroundColor(viewModel.selectedColor)
+                    .padding(EdgeInsets(top: 1, leading: 4, bottom: 1, trailing: 4))
+                    .overlay(FlyingNumber(number: scoreChange(cardId: card.id)))
+                    .zIndex(scoreChange(cardId: card.id) != 0 ? 1 : 0)
                     .onTapGesture {
-                        viewModel.choose(card)
+                        withAnimation {
+                            let scoreBeforeChoosing = viewModel.score
+                            viewModel.choose(card)
+                            let scoreDiff = viewModel.score - scoreBeforeChoosing
+                            lastScoreChange = (scoreDiff, card.id)
+                        }
                     }
             }
         }
@@ -85,7 +107,11 @@ struct ContentView: View {
                 cards.animation(.default, value: viewModel.cards)
             }
             Spacer()
-            shuffleButton.padding(.init(top: 2, leading: 2, bottom: 4, trailing: 2))
+            HStack {
+                score
+                Spacer()
+                shuffleButton.padding(.init(top: 2, leading: 2, bottom: 4, trailing: 2))
+            }
             themeAdjuster
 //            numCardsAdjuster
         }.foregroundColor(viewModel.selectedColor)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CirclePartView: View {
     var body: some View {
-        CirclePart(endAngle: .degrees(210)).transformIntoCard(isFaceUp: true)
+        CirclePart(endAngle: .degrees(240)).foregroundColor(.blue).opacity(0.6).transformIntoCard(isFaceUp: true).foregroundColor(.orange)
     }
 }
 
