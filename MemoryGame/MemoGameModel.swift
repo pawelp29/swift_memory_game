@@ -79,6 +79,7 @@ struct MemoGameModel<CardContent> where CardContent: Equatable {
             cards.append(Card(id:"\(pairIndex+1)a", content: content))
             cards.append(Card(id:"\(pairIndex+1)b", content: content))
         }
+        score = 0
     }
     
     struct Card: Equatable, Identifiable {
